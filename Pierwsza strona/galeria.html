@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Marek Dadej" />
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>Hunti.pl</title>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row>.column {
+            padding: 0 8px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column {
+            float: left;
+            width: 200px;
+            height: 120px;
+            margin-bottom: 10px;
+            margin-right: 5px;
+            margin-left: 5px;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 2Fr));
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 80px;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: black;
+        }
+
+
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .mySlides {
+            display: none;
+            background-color: rgb(0, 0, 0);
+            text-align: center;
+        }
+
+        .cursor {
+            cursor: pointer;
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: rgb(0, 0, 0);
+            background-color: rgb(120, 120, 120);
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .numbertext {
+            color: #ffffff;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .img {
+            width: 200px;
+            height: 120px;
+            margin-bottom: -4px;
+            border: 1px solid black;
+            border-radius: 8px;
+            margin-bottom: -4px;
+        }
+
+        .caption-container {
+            text-align: center;
+            background-color: black;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .demo {
+            opacity: 0.6;
+        }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+
+        img.hover-shadow {
+            transition: 0.3s;
+            width: 300px;
+            height: 150px;
+        }
+
+        .hover-shadow:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="bi bi-list"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </label>
+
+        <label><a href="index.html"><img  class="logo" src="logo.jpeg" alt="logo" ></a></label>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="forex.html">Forex</a></li>
+            <li><a href="krypto.html">Krypto</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="o_nas.html">O nas</a></li>
+            <li><a href="wspol.html">Współpraca</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="intro">
+            <h2>Galeria</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="column">
+                <img  class="img" src="picture/header.picture.jpeg" style="  width: 200px; height: 120px;" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/bitcoin.jpeg" style="width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/forex.picture.jpeg" style="  width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/forex2.jpeg" style="width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/images.jpeg" style="width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(5)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/forex3.jpeg" style="width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(6)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/krypto2.jpeg" style="width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(7)" class="hover-shadow cursor">
+            </div>
+
+            <div class="column">
+                <img class="img" src="picture/forex4.jpeg" style="width: 200px;
+                height: 120px;" onclick="openModal();currentSlide(8)" class="hover-shadow cursor">
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+
+                <div class="mySlides">
+                    <div class="numbertext">1 / 8</div>
+                    <img src="picture/header.picture.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">2 / 8</div>
+                    <img src="picture/bitcoin.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">3 / 8</div>
+                    <img src="picture/forex.picture.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">4 / 8</div>
+                    <img src="picture/forex2.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">5 / 8</div>
+                    <img src="picture/images.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">6 / 8</div>
+                    <img src="picture/forex3.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">7 / 8</div>
+                    <img src="picture/krypto2.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <div class="mySlides">
+                    <div class="numbertext">8 / 8</div>
+                    <img src="picture/forex4.jpeg" style="width: 720px; height: 370px;">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/header.picture.jpeg" style="width: 200px; height: 120px;" onclick="currentSlide(1)" alt="Forex">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/bitcoin.jpeg" style="width: 200px; height: 120px;" onclick="currentSlide(2)" alt="Krypto">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/forex.picture.jpeg" style="width: 200px; height: 120px;"
+                        onclick="currentSlide(3)" alt="Forex">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/forex2.jpeg" style="width: 200px; height: 120px;"
+                        onclick="currentSlide(4)" alt="Forex">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/images.jpeg" style="width: 200px; height: 120px;"
+                        onclick="currentSlide(5)" alt="Krypto">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/forex3.jpeg" style="width: 200px; height: 120px;"
+                        onclick="currentSlide(6)" alt="Forex">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/krypto2.jpeg" style="width: 200px; height: 120px;"
+                        onclick="currentSlide(7)" alt="Krypto">
+                </div>
+
+                <div class="column">
+                    <img class="demo cursor" src="picture/forex4.jpeg" style="width: 200px; height: 120px;"
+                        onclick="currentSlide(8)" alt="Forex">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+    </script>
+
+    <footer>
+        <p style="text-align: center;">&copy; 2023 Hunti.pl</p>
+    </footer>
+</body>
+
+</html>
